@@ -1,18 +1,20 @@
-var controller = require('./controller');
+var controller = require("./controller");
+var action = require("./action");
+
 var item = {
   "id": 1,
   "title": "Hello",
   "text": "World!"
 };
 
-var posts = controller({
-  "/posts": function(req) {
-    return [item];
-  },
-  "/posts/:id": function(req) {
-    var id = parseInt(req.params.id, 10);
-    return item.id === id ? item : {};
-  }
-});
+var posts = controller([
+  action("/posts", "show posts", function(req) {
+      return [item];
+    }),
+  action("/posts/:id", "show post", "posts", function(req) {
+      var id = parseInt(req.params.id, 10);
+      return item.id === id ? item : {};
+    })
+  ]);
 
 module.exports = posts;
