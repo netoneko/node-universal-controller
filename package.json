@@ -21,6 +21,8 @@
     "express": "3.0.0",
     "underscore": "1.5.2",
     "mocha": "1.16.2",
-    "supertest": "0.8.2"
+    "supertest": "0.8.2",
+    "socket.io": "0.9.16",
+    "socket.io-client": "0.9.16"
   }
 }
