@@ -5,7 +5,7 @@ socket.on("connect", function () {
   socket.emit("show post", { "id": 1 });
 });
 
-socket.on("update", function(response) {
+socket.on("result(show post)", function(response) {
   if (response.status !== 200) {
     return;
   }

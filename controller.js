@@ -4,16 +4,16 @@ var controller = function(handlers) {
     return memo;
   }, {});
 
-  appendRoute = function(callback) {
-    handlers.map(callback);
+  appendRoute = function(key, callback) {
+    handlers.map(function(action) {
+      if (action[key]) {
+        callback(action);
+      }
+    });
   };
 
   this.rest = function(app) {
-    appendRoute(function(action) {
-      if (!action.path) {
-        return;
-      }
-
+    appendRoute("path", function(action) {
       app.get(action.path, function(request, response) {
         var value = action.handler(request);
         response.send(value);
@@ -22,16 +22,12 @@ var controller = function(handlers) {
   };
 
  this.websocket = function(socket) {
-   appendRoute(function(action) {
-     if (!action.socket) {
-       return;
-     }
-
+   appendRoute("socket", function(action) {
      socket.on(action.socket, function(data) {
        var request = { "params": data };
        var value = action.handler(request);
 
-       socket.emit("update", { "status": 200, "data": value });
+       socket.emit("result(" + action.socket +")", { "status": 200, "data": value });
      });
   });
  };
@@ -39,18 +35,13 @@ var controller = function(handlers) {
  this.redis = function(redis) {
    redis.on("message", function (channel, message) {
      try {
-       var json = JSON.parse(message.toString());
-       var request = { "params": json };
+       var request = { "params": JSON.parse(message.toString()) };
        var value = subHandlers[channel](request);
        console.log(value);
      } catch(e) { }
    });
 
-   appendRoute(function(action) {
-     if (!action.sub) {
-       return;
-     }
-
+   appendRoute("sub", function(action) {
      redis.subscribe(action.sub);
    });
  };
