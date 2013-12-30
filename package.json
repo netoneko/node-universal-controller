@@ -1,0 +1,24 @@
+{
+  "name": "node-universal-controller",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/netoneko/node-universal-controller"
+  },
+  "author": "Kirill Maksimov <netoneko@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/netoneko/node-universal-controller/issues"
+  },
+  "homepage": "https://github.com/netoneko/node-universal-controller",
+  "dependencies": {
+    "express": "3.0.0",
+    "underscore": "1.5.2"
+  }
+}
