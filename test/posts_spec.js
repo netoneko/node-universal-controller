@@ -6,10 +6,6 @@ var item = {
   "text": "World!"
 };
 
-var stringify = function(object){
-  return JSON.stringify(object, null, "  ");
-};
-
 describe("GET /posts", function(){
   it("respond with json", function(done){
     request(app)
