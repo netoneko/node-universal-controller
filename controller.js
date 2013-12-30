@@ -13,12 +13,12 @@ var controller = function(handlers) {
   };
 
  this.websocket = function(socket) {
-   appendRoute(function() {
-     socket.on("/posts", function(data) {
+   appendRoute(function(route) {
+     socket.on(route, function(data) {
        var request = { "params": data };
        var value = handlers[route](request);
 
-       io.sockets.emit("update", { "status": 200, "data": value });
+       socket.emit("update", { "status": 200, "data": value });
      });
   });
  };
