@@ -12,3 +12,7 @@
 
 * `watch -n 3 "browserify client.js > public/lib/dist.js"`
 
+## How to test
+* `npm test`
+* `redis-cli PUBLISH "posts:show" "{\"id\": 1}"` when server is running should print an item to server logs.
+
