@@ -1,5 +1,6 @@
 var request = require('supertest');
 var app = require('../index');
+app.init();
 
 var item = {
   "title": "Hello",

@@ -1,9 +1,9 @@
 var controller = require('./controller');
 
 var posts = controller({
-  "/posts": function(req, res) {
+  "/posts": function(req) {
     var item = {"title": "Hello", "text": "World!"};
-    res.send([item]);
+    return [item];
   }
 });
 
