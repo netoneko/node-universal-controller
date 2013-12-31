@@ -18,7 +18,7 @@
 
 ## How does it work
 
-This is a proof concept MVC app where controllers can register and respond to any of these interfaces: HTTP, Socket.io or Redis Pub/Sub.
+This is a proof of concept MVC app where controllers can register and respond to any of these interfaces: HTTP, Socket.io or Redis Pub/Sub.
 
 Basic controller looks like this (take a peek at `posts.js`):
 
@@ -56,4 +56,14 @@ You can simply access a controller through this API:
 * Redis: `PUBLISH "posts:all" "{\"id\": 1}"`
 
 Note that for Socket.io and Redis I pass JSON object as a parameter. This object will be bound to `request.params`.
+
+## Why it's not production ready
+
+A number of features is missing from this proof-of-concept app. For example,
+
+* HTTP codes.
+* Error handling.
+* Actions other than Express' `app.get()`.
+
+Also maybe I should pass current environment to the handler like `function(request, env)` which will be one of three: `rest`, `socket` or `redis`. Based on this info one who writes the handler could respond differently to every call, similar to Rails' `respond_to`.
 
